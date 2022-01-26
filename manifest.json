@@ -1,0 +1,18 @@
+{
+    "name": "Aliexpress settings saver",
+    "description": "Save set parameters to display page with correct shipment country and currency",
+    "version": "1.0",
+    "manifest_version": 2,
+    "content_scripts": [{
+        "matches": ["http://aliexpress.ru/*", "https://aliexpress.com/*", "https://*.aliexpress.com/*", "http://*.aliexpress.com/*", "https://*.aliexpress.ru/*", "http://*.aliexpress.com/*"],
+        "js": ["./js/jquery-3.5.1.js", "./js/content_script.js", "./js/app.js"]
+    }],
+    "permissions": [
+        "storage",
+        "tabs"
+    ],
+    "browser_action": {
+        "default_title": "Aliexpress settings saver",
+        "default_popup": "popup.html"
+    }
+}
