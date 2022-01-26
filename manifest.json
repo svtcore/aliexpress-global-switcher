@@ -1,6 +1,6 @@
 {
     "name": "Aliexpress settings saver",
-    "description": "Save set parameters to display page with correct shipment country and currency",
+    "description": "Saving settings parameters and apply them to open pages",
     "version": "1.0",
     "manifest_version": 2,
     "content_scripts": [{
