@@ -391,20 +391,46 @@ var currencies = {
     "PAB": "PAB ( Panamanian balboa )",
 };
 
+var shipment_methods = {
+    "en": {
+        0: " via AliExpress Standard Shipping",
+        1: " via AliExpress Saver Shipping",
+        2: " via AliExpress Premium Shipping",
+        3: " via Cainiao Standard for Special Goods",
+        4: " via Cainiao Super Economy for Special Goods",
+        5: " via Cainiao Super Economy Global",
+        6: " via Cainiao Warehouse Standard Shipping",
+        7: " via Cainiao Expedited Economy",
+        8: " via China Post Air Parcel",
+        9: " via Turkey Post",
+        10: " via Seller's Shipping Method",
+        11: " via FedEx",
+        12: " via DHL",
+        13: " via e-EMS",
+    }
+};
+
 $(document).ready(function() {
     chrome.storage.sync.get("alidata", function(obj) {
         if (typeof obj.alidata != 'undefined') {
             var alidata = JSON.parse(obj.alidata);
             if (alidata[0].global_mode) $("#global_mode").prop('checked', true);
             if (alidata[0].country_currency_mode) $("#country_currency_mode").prop('checked', true);
+            if (alidata[0].shipment_method_mode) $("#shipment_method_mode").prop('checked', true);
             for (var key in countries) {
                 $('#countries').append("<option value='" + key + "'>" + countries[key] + "</option>");
             }
             for (var key in currencies) {
                 $('#currencies').append("<option value='" + key + "'>" + currencies[key] + "</option>");
             }
+            for (var key_1 in shipment_methods) {
+                for (var key_2 in shipment_methods[key_1]) {
+                    $('#shipment_methods').append("<option value='" + key_2 + "'>" + shipment_methods[key_1][key_2] + "</option>");
+                }
+            }
             $("#countries option[value=" + alidata[0].region + "]").attr('selected', 'selected');
             $("#currencies option[value=" + alidata[0].currency + "]").attr('selected', 'selected');
+            $("#shipment_methods option[value=" + alidata[0].shipment_method_id + "]").attr('selected', 'selected');
         } else {
             createDefaultKey()
         }
@@ -421,6 +447,8 @@ function createDefaultKey() {
     jsonArg.site = "glo";
     jsonArg.global_mode = 0;
     jsonArg.country_currency_mode = 0;
+    jsonArg.shipment_method_mode = 0;
+    jsonArg.shipment_method_id = 0;
     arrayArg.push(jsonArg);
     var jsonArray = JSON.stringify(arrayArg);
     chrome.storage.sync.set({ "alidata": jsonArray }, function() {
@@ -449,6 +477,9 @@ function updateKey() {
     else jsonArg.global_mode = 0;
     if ($('#country_currency_mode').is(":checked")) jsonArg.country_currency_mode = 1;
     else jsonArg.country_currency_mode = 0;
+    if ($('#shipment_method_mode').is(":checked")) jsonArg.shipment_method_mode = 1;
+    else jsonArg.shipment_method_mode = 0;
+    jsonArg.shipment_method_id = $("#shipment_methods :selected").val();
     arrayArg.push(jsonArg);
     var jsonArray = JSON.stringify(arrayArg);
     chrome.storage.sync.set({ "alidata": jsonArray }, function() {
@@ -456,16 +487,7 @@ function updateKey() {
     });
 }
 
-$('select').change(function() {
-    updateKey();
-    $("#message").text("Changes will be apply after reload page")
-});
-
-$("#global_mode").change(function() {
-    updateKey();
-    $("#message").text("Changes will be apply after reload page")
-});
-$("#country_currency_mode").change(function() {
+$("select, #global_mode, #country_currency_mode, #shipment_method_mode").change(function() {
     updateKey();
     $("#message").text("Changes will be apply after reload page")
 });

@@ -15,7 +15,7 @@
         <div class="input-group mb-3">
             <div class="form-check form-switch">
                 <input class="form-check-input" id="country_currency_mode" type="checkbox">
-                <label class="form-check-label">Always set selected country and currency</label>
+                <label class="form-check-label">Display selected country and currency</label>
             </div>
         </div>
         <div class="input-group mb-3">
@@ -24,9 +24,21 @@
             <select class="form-select" id="currencies" autocomplete="off">
             </select>
         </div>
+        <hr>
+        <div class="input-group mb-3">
+            <div class="form-check form-switch">
+                <input class="form-check-input" id="shipment_method_mode" type="checkbox">
+                <label class="form-check-label">Display selected shipment method (beta)</label>
+            </div>
+        </div>
+        <div class="input-group mb-3">
+            <select class="form-select" id="shipment_methods" autocomplete="off">
+            </select>
+        </div>
         <span id="message"></span>
         <a id="github" href="#" class="link-dark text-center d-block mt-2">Github svtcore</a>
     </div>
+
 </body>
 <script src="./js/jquery-3.5.1.js"></script>
 <script src="./js/bootstrap.min.js"></script>

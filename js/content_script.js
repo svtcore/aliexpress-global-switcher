@@ -5,7 +5,33 @@
  * 
  */
 
+
+var shipment_methods = {
+    "en": {
+        0: " via AliExpress Standard Shipping",
+        1: " via AliExpress Saver Shipping",
+        2: " via AliExpress Premium Shipping",
+        3: " via Cainiao Standard for Special Goods",
+        4: " via Cainiao Super Economy for Special Goods",
+        5: " via Cainiao Super Economy Global",
+        6: " via Cainiao Warehouse Standard Shipping",
+        7: " via Cainiao Expedited Economy",
+        8: " via China Post Air Parcel",
+        9: " via Turkey Post",
+        10: " via Seller's Shipping Method",
+        11: " via FedEx",
+        12: " via DHL",
+        13: " via e-EMS",
+    }
+};
+
+$(document).ready(function() {
+    $('.comet-modal-content').attr("hidden", false);
+    $('.comet-modal-mask .comet-modal-wrap').css("position", "");
+});
+
 chrome.storage.sync.get("alidata", function(obj) {
+    //$('.comet-icon.comet-icon-close ').click();
     if (typeof obj.alidata != 'undefined') {
         var alidata = JSON.parse(obj.alidata);
         var current_url = String(window.location);
@@ -43,6 +69,23 @@ chrome.storage.sync.get("alidata", function(obj) {
                 if ((alidata[0].currency).toUpperCase() != currency || (alidata[0].region).toUpperCase() != region) {
                     cookielink = "https://login.aliexpress.com/setCommonCookie.htm?fromApp=false&currency=" + alidata[0].currency + "&region=" + (alidata[0].region).toUpperCase() + "&bLocale=" + b_locale + "&site=" + site + "&province=&city=";
                     ajax = true;
+                }
+            }
+            //if enebled auto switch to shipment
+            if (alidata[0].shipment_method_mode) {
+                if (current_url.search("item") != -1) {
+                    $('.comet-btn.comet-btn-text.product-dynamic-shipping-moreOptions').click();
+                    $('.comet-modal-content').attr("hidden", true);
+                    $(".comet-btn.comet-btn-text").click();
+                    //once it set selected and then reset default, so do it again in loop
+                    for (var i = 0; i < 10; i++) {
+                        $(".dynamic-shipping-line.dynamic-shipping-contentLayout span").each(function() {
+                            if ($(this).text() == shipment_methods["en"][alidata[0].shipment_method_id]) {
+                                $(this).click();
+                            }
+                        });
+                    };
+                    $('.comet-icon.comet-icon-close').click();
                 }
             }
         }
@@ -147,6 +190,8 @@ function createDefaultKey() {
     jsonArg.site = "glo";
     jsonArg.global_mode = 0;
     jsonArg.country_currency_mode = 0;
+    jsonArg.shipmet_method_mode = 0;
+    jsonArg.shipment_method_id = 0;
     arrayArg.push(jsonArg);
     var jsonArray = JSON.stringify(arrayArg);
     chrome.storage.sync.set({ "alidata": jsonArray }, function() {
