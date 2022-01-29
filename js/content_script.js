@@ -31,7 +31,6 @@ $(document).ready(function() {
 });
 
 chrome.storage.sync.get("alidata", function(obj) {
-    //$('.comet-icon.comet-icon-close ').click();
     if (typeof obj.alidata != 'undefined') {
         var alidata = JSON.parse(obj.alidata);
         var current_url = String(window.location);
