@@ -5,26 +5,6 @@
  * 
  */
 
-
-var shipment_methods = {
-    "en": {
-        0: " via AliExpress Standard Shipping",
-        1: " via AliExpress Saver Shipping",
-        2: " via AliExpress Premium Shipping",
-        3: " via Cainiao Standard for Special Goods",
-        4: " via Cainiao Super Economy for Special Goods",
-        5: " via Cainiao Super Economy Global",
-        6: " via Cainiao Warehouse Standard Shipping",
-        7: " via Cainiao Expedited Economy",
-        8: " via China Post Air Parcel",
-        9: " via Turkey Post",
-        10: " via Seller's Shipping Method",
-        11: " via FedEx",
-        12: " via DHL",
-        13: " via e-EMS",
-    }
-};
-
 $(document).ready(function() {
     $('.comet-modal-content').attr("hidden", false);
     $('.comet-modal-mask .comet-modal-wrap').css("position", "");
@@ -78,11 +58,13 @@ chrome.storage.sync.get("alidata", function(obj) {
                     $(".comet-btn.comet-btn-text").click();
                     //once it set selected and then reset default, so do it again in loop
                     for (var i = 0; i < 10; i++) {
-                        $(".dynamic-shipping-line.dynamic-shipping-contentLayout span").each(function() {
-                            if ($(this).text() == shipment_methods["en"][alidata[0].shipment_method_id]) {
-                                $(this).click();
-                            }
-                        });
+                        for (var ship_key in shipment_methods) {
+                            $(".dynamic-shipping-line.dynamic-shipping-contentLayout span").each(function() {
+                                if ($(this).text() == shipment_methods[ship_key][alidata[0].shipment_method_id]) {
+                                    $(this).click();
+                                }
+                            });
+                        }
                     };
                     $('.comet-icon.comet-icon-close').click();
                 }
