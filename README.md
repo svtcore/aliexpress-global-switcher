@@ -13,7 +13,7 @@ Chrome extension which helps to display pages with set shipment country, currenc
 
 **3. Display selected shipment method.** When open page of product it shows default shipment method. In case if you looking for special delivery method and browse a lot of products this function automate switch to selected in extension and save your time.
 
-Note: Currenlty working only on global version with english.
+Note: Working for all languages in global version (.com)
 
 ## Install
 
