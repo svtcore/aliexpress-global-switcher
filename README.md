@@ -29,4 +29,4 @@ Note: Working for all languages in global version (.com)
 Pull requests are welcome.
 
 # License
-[GPL-3.0](https://github.com/svtcore/aliexpress-settings-saver/blob/main/LICENSE)
+[MIT](https://github.com/svtcore/aliexpress-settings-saver/blob/main/LICENSE)
