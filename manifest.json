@@ -2,7 +2,7 @@
     "name": "Aliexpress settings saver",
     "description": "Saving settings parameters and apply them to open pages",
     "version": "1.0.1",
-    "manifest_version": 2,
+    "manifest_version": 3,
     "content_scripts": [{
         "matches": ["http://aliexpress.ru/*", "https://aliexpress.com/*", "https://*.aliexpress.com/*", "http://*.aliexpress.com/*", "https://*.aliexpress.ru/*", "http://*.aliexpress.com/*"],
         "js": ["./js/jquery-3.5.1.js", "./js/content_script.js", "./js/app.js"]
@@ -11,7 +11,7 @@
         "storage",
         "tabs"
     ],
-    "browser_action": {
+    "action": {
         "default_title": "Aliexpress settings saver",
         "default_popup": "popup.html"
     }
