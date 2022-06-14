@@ -15,7 +15,7 @@ Chrome extension which helps to display pages with set shipment country, currenc
 
 Note: Working for all languages in global version (.com)
 
-## Install
+## Install extension
 
 1. Clone/Download repository in folder
 2. In Chrome Browser enable Developer Mode 
@@ -24,6 +24,10 @@ Note: Working for all languages in global version (.com)
 3. Click **Load unpacked** and choose folder with project
 4. Open extension on the Menu Bar and choose function which you want to enable.
 5. Open any aliexpress page and see results
+
+## Ручне налаштування глобальної версії, якщо перенаправляє на ру версію, або сайт не відкривається взагалі (UKR) / Manual settings to set gloabal version
+**Інструкція тут / Manual here**
+[https://gist.github.com/svtcore/824872f8d60a863f57e6fdfb972366b9](https://gist.github.com/svtcore/824872f8d60a863f57e6fdfb972366b9)
 
 # Contributing
 Pull requests are welcome.
