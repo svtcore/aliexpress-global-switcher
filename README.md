@@ -27,6 +27,7 @@ Note: Working for all languages in global version (.com)
 
 ## Ручне налаштування глобальної версії, якщо перенаправляє на ру версію, або сайт не відкривається взагалі (UKR) / Manual settings to set gloabal version
 **Інструкція тут / Manual here**
+
 [https://gist.github.com/svtcore/824872f8d60a863f57e6fdfb972366b9](https://gist.github.com/svtcore/824872f8d60a863f57e6fdfb972366b9)
 
 # Contributing
