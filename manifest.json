@@ -1,18 +1,23 @@
 {
-    "name": "Aliexpress settings saver",
-    "description": "Saving settings parameters and apply them to open pages",
-    "version": "1.0.1",
-    "manifest_version": 3,
-    "content_scripts": [{
-        "matches": ["http://aliexpress.ru/*", "https://aliexpress.com/*", "https://*.aliexpress.com/*", "http://*.aliexpress.com/*", "https://*.aliexpress.ru/*", "http://*.aliexpress.com/*"],
-        "js": ["./js/jquery-3.5.1.js", "./js/content_script.js", "./js/app.js"]
-    }],
-    "permissions": [
-        "storage",
-        "tabs"
-    ],
-    "action": {
-        "default_title": "Aliexpress settings saver",
-        "default_popup": "popup.html"
-    }
+  "name": "Aliexpress global switcher",
+  "manifest_version": 3,
+  "version": "0.1",
+  "description": "Automate switch from ru to global version aliexpress.com",
+  "permissions": [
+    "tabs",
+    "storage",
+    "cookies"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "host_permissions": [
+    "https://login.aliexpress.com/*",
+    "https://login.aliexpress.ru/*",
+    "https://aliexpress.ru/*",
+    "https://www.aliexpress.com/*"
+  ],
+  "background": {
+    "service_worker": "./js/background.js"
+  }
 }
