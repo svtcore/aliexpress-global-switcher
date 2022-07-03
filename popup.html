@@ -1,47 +1,62 @@
 <html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="./third_party/bootstrap_5.0.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
 
-<head>
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/styles.css">
-</head>
-
-<body>
+  <body>
     <div class="main-block">
+      <div class="form-check form-switch">
+        <input class="form-check-input" id="global_mode" type="checkbox"/>
+        <label class="form-check-label">Always open global version aliexpress.com</label>
+      </div>
+      <hr />
+      <div class="input-group mb-3">
+        <!--<div class="form-check form-switch">
+          <input
+            class="form-check-input"
+            id="country_currency_mode"
+            type="checkbox"
+          />-->
+          <label class="form-check-label"
+            >Setup country and currency</label
+          >
+        <!--</div>-->
+      </div>
+      <div class="input-group mb-3">
+        <select class="form-select" id="countries" autocomplete="off"></select>
+        <select class="form-select" id="currencies" autocomplete="off"></select>
+      </div>
+      <hr />
+      <!--<div class="input-group mb-3">
         <div class="form-check form-switch">
-            <input class="form-check-input" id="global_mode" type="checkbox">
-            <label class="form-check-label">Always open global version</label>
+          <input
+            class="form-check-input"
+            id="shipment_method_mode"
+            type="checkbox"
+          />
+          <label class="form-check-label"
+            >Display selected shipment method (beta)</label
+          >
         </div>
-        <hr>
-        <div class="input-group mb-3">
-            <div class="form-check form-switch">
-                <input class="form-check-input" id="country_currency_mode" type="checkbox">
-                <label class="form-check-label">Display selected country and currency</label>
-            </div>
-        </div>
-        <div class="input-group mb-3">
-            <select class="form-select" id="countries" autocomplete="off">
-            </select>
-            <select class="form-select" id="currencies" autocomplete="off">
-            </select>
-        </div>
-        <hr>
-        <div class="input-group mb-3">
-            <div class="form-check form-switch">
-                <input class="form-check-input" id="shipment_method_mode" type="checkbox">
-                <label class="form-check-label">Display selected shipment method (beta)</label>
-            </div>
-        </div>
-        <div class="input-group mb-3">
-            <select class="form-select" id="shipment_methods" autocomplete="off">
-            </select>
-        </div>
-        <span id="message"></span>
-        <a id="github" href="#" class="link-dark text-center d-block mt-2">Github svtcore</a>
+      </div>
+      <div class="input-group mb-3">
+        <select
+          class="form-select"
+          id="shipment_methods"
+          autocomplete="off"
+        ></select>
+      </div>-->
+      <span id="message"></span>
+      <a id="github" href="#" class="link-dark text-center d-block mt-2"
+        >Github svtcore</a
+      >
     </div>
-
-</body>
-<script src="./js/jquery-3.5.1.js"></script>
-<script src="./js/bootstrap.min.js"></script>
-<script src="./js/app.js"></script>
-
+  </body>
+  <script src="./third_party/js/jquery-3.6.0.min.js"></script>
+  <script src="./third_party/bootstrap_5.0.2/js/bootstrap.min.js"></script>
+  <script src="./js/app.js"></script>
 </html>

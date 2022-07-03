@@ -181,7 +181,6 @@ var countries = {
     "qa": "Qatar",
     "re": "Reunion",
     "ro": "Romania",
-    "ru": "Russian Federation",
     "rw": "Rwanda",
     "blm": "Saint Barthelemy",
     "kn": "Saint Kitts and Nevis",
@@ -248,7 +247,6 @@ var currencies = {
     "USD": "USD ( US Dollar )",
     "EUR": "EUR ( Euro )",
     "UAH": "UAH ( Ukraine Hryvnia )",
-    "RUB": "RUB ( Russian Rouble )",
     "AFN": "AFN ( Afghan Afghani )",
     "ALL": "ALL ( Albanian Lek )",
     "AOA": "AOA ( Angolan Kwanza )",
@@ -548,8 +546,8 @@ var shipment_methods = {
 
 };
 
-$(document).ready(function() {
-    chrome.storage.sync.get("alidata", function(obj) {
+$(document).ready(function () {
+    chrome.storage.sync.get("alidata", function (obj) {
         if (typeof obj.alidata != 'undefined') {
             var alidata = JSON.parse(obj.alidata);
             if (alidata[0].global_mode) $("#global_mode").prop('checked', true);
@@ -561,53 +559,41 @@ $(document).ready(function() {
             for (var key in currencies) {
                 $('#currencies').append("<option value='" + key + "'>" + currencies[key] + "</option>");
             }
-            for (var key in shipment_methods["en"]) {
+            /*for (var key in shipment_methods["en"]) {
                 $('#shipment_methods').append("<option value='" + key + "'>" + (shipment_methods["en"][key]).replace(" via", "") + "</option>");
-            }
+            }*/
             $("#countries option[value=" + alidata[0].region + "]").attr('selected', 'selected');
             $("#currencies option[value=" + alidata[0].currency + "]").attr('selected', 'selected');
-            $("#shipment_methods option[value=" + alidata[0].shipment_method_id + "]").attr('selected', 'selected');
-        } else {
-            createDefaultKey()
+            //$("#shipment_methods option[value=" + alidata[0].shipment_method_id + "]").attr('selected', 'selected');
         }
     });
 });
 
-
-function createDefaultKey() {
-    var arrayArg = new Array();
-    var jsonArg = new Object();
-    jsonArg.currency = "USD";
-    jsonArg.region = "US";
-    jsonArg.locale = "en_US";
-    jsonArg.site = "glo";
-    jsonArg.global_mode = 0;
-    jsonArg.country_currency_mode = 0;
-    jsonArg.shipment_method_mode = 0;
-    jsonArg.shipment_method_id = 0;
-    arrayArg.push(jsonArg);
-    var jsonArray = JSON.stringify(arrayArg);
-    chrome.storage.sync.set({ "alidata": jsonArray }, function() {
-        console.log("Created default alidata key")
-    });
-}
-
 function deleteKey() {
-    chrome.storage.sync.remove('alidata', function() {
+    chrome.storage.sync.remove('alidata', function () {
         console.log('Key has been deleted from storage');
-    });
-    chrome.storage.sync.remove('alidata_temp', function() {
-        console.log('Temp link has been deleted from storage');
     });
 }
 
 function updateKey() {
+    try {
+        chrome.cookies.remove({ "url": "https://aliexpress.ru", "name": "aep_usuc_f" }, function (deleted_cookie) { console.log(deleted_cookie); });
+    }
+    catch {
+        console.log('error while delete ru cookie');
+    }
+    try {
+        chrome.cookies.remove({ "url": "https://www.aliexpress.com", "name": "aep_usuc_f" }, function (deleted_cookie) { console.log(deleted_cookie); });
+    }
+    catch {
+        console.log('error while delete com cookie');
+    }
     deleteKey();
     var arrayArg = new Array();
     var jsonArg = new Object();
     jsonArg.currency = $("#currencies :selected").val();
     jsonArg.region = $("#countries :selected").val();
-    jsonArg.locale = "en_US";
+    jsonArg.b_locale = "en_US";
     jsonArg.site = "glo";
     if ($('#global_mode').is(":checked")) jsonArg.global_mode = 1;
     else jsonArg.global_mode = 0;
@@ -618,17 +604,17 @@ function updateKey() {
     jsonArg.shipment_method_id = $("#shipment_methods :selected").val();
     arrayArg.push(jsonArg);
     var jsonArray = JSON.stringify(arrayArg);
-    chrome.storage.sync.set({ "alidata": jsonArray }, function() {
+    chrome.storage.sync.set({ "alidata": jsonArray }, function () {
         console.log("Key successful updated")
     });
 }
 
-$("select, #global_mode, #country_currency_mode, #shipment_method_mode").change(function() {
+$("select, #global_mode, #country_currency_mode, #shipment_method_mode").change(function () {
     updateKey();
     $("#message").text("Changes will be apply after reload page")
 });
 
-$('#github').click(function() {
+$('#github').click(function () {
     chrome.tabs.create({ url: 'https://github.com/svtcore' });
     return false;
 });
