@@ -556,6 +556,7 @@ $(document).ready(function () {
             for (var key in countries) {
                 $('#countries').append("<option value='" + key + "'>" + countries[key] + "</option>");
             }
+            $('#countries option[value=ua]').attr('selected','selected');
             for (var key in currencies) {
                 $('#currencies').append("<option value='" + key + "'>" + currencies[key] + "</option>");
             }
@@ -576,18 +577,6 @@ function deleteKey() {
 }
 
 function updateKey() {
-    try {
-        chrome.cookies.remove({ "url": "https://aliexpress.ru", "name": "aep_usuc_f" }, function (deleted_cookie) { console.log(deleted_cookie); });
-    }
-    catch {
-        console.log('error while delete ru cookie');
-    }
-    try {
-        chrome.cookies.remove({ "url": "https://www.aliexpress.com", "name": "aep_usuc_f" }, function (deleted_cookie) { console.log(deleted_cookie); });
-    }
-    catch {
-        console.log('error while delete com cookie');
-    }
     deleteKey();
     var arrayArg = new Array();
     var jsonArg = new Object();
@@ -598,7 +587,10 @@ function updateKey() {
     if ($('#global_mode').is(":checked")) jsonArg.global_mode = 1;
     else jsonArg.global_mode = 0;
     if ($('#country_currency_mode').is(":checked")) jsonArg.country_currency_mode = 1;
-    else jsonArg.country_currency_mode = 0;
+    else {
+        jsonArg.country_currency_mode = 0;
+        jsonArg.country_currency = 0;
+    }
     if ($('#shipment_method_mode').is(":checked")) jsonArg.shipment_method_mode = 1;
     else jsonArg.shipment_method_mode = 0;
     jsonArg.shipment_method_id = $("#shipment_methods :selected").val();

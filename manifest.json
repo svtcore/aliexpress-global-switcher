@@ -15,7 +15,8 @@
     "https://login.aliexpress.com/*",
     "https://login.aliexpress.ru/*",
     "https://aliexpress.ru/*",
-    "https://www.aliexpress.com/*"
+    "https://www.aliexpress.com/*",
+    "https://wp.aliexpress.com/*"
   ],
   "background": {
     "service_worker": "./js/background.js"
