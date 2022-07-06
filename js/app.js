@@ -549,56 +549,71 @@ var shipment_methods = {
 $(document).ready(function () {
     chrome.storage.sync.get("alidata", function (obj) {
         if (typeof obj.alidata != 'undefined') {
-            var alidata = JSON.parse(obj.alidata);
-            if (alidata[0].global_mode) $("#global_mode").prop('checked', true);
-            if (alidata[0].country_currency_mode) $("#country_currency_mode").prop('checked', true);
-            if (alidata[0].shipment_method_mode) $("#shipment_method_mode").prop('checked', true);
-            for (var key in countries) {
-                $('#countries').append("<option value='" + key + "'>" + countries[key] + "</option>");
+            try {
+                var alidata = JSON.parse(obj.alidata);
+                if (alidata[0].global_mode) $("#global_mode").prop('checked', true);
+                if (alidata[0].country_currency_mode) $("#country_currency_mode").prop('checked', true);
+                if (alidata[0].shipment_method_mode) $("#shipment_method_mode").prop('checked', true);
+                for (var key in countries) {
+                    $('#countries').append("<option value='" + key + "'>" + countries[key] + "</option>");
+                }
+                $('#countries option[value=us]').attr('selected', 'selected');
+                for (var key in currencies) {
+                    $('#currencies').append("<option value='" + key + "'>" + currencies[key] + "</option>");
+                }
+                /*for (var key in shipment_methods["en"]) {
+                    $('#shipment_methods').append("<option value='" + key + "'>" + (shipment_methods["en"][key]).replace(" via", "") + "</option>");
+                }*/
+                $("#countries option[value=" + alidata[0].region + "]").attr('selected', 'selected');
+                $("#currencies option[value=" + alidata[0].currency + "]").attr('selected', 'selected');
+                //$("#shipment_methods option[value=" + alidata[0].shipment_method_id + "]").attr('selected', 'selected');
             }
-            $('#countries option[value=ua]').attr('selected','selected');
-            for (var key in currencies) {
-                $('#currencies').append("<option value='" + key + "'>" + currencies[key] + "</option>");
+            catch {
+                console.log("Error while loading key data on the popup")
             }
-            /*for (var key in shipment_methods["en"]) {
-                $('#shipment_methods').append("<option value='" + key + "'>" + (shipment_methods["en"][key]).replace(" via", "") + "</option>");
-            }*/
-            $("#countries option[value=" + alidata[0].region + "]").attr('selected', 'selected');
-            $("#currencies option[value=" + alidata[0].currency + "]").attr('selected', 'selected');
-            //$("#shipment_methods option[value=" + alidata[0].shipment_method_id + "]").attr('selected', 'selected');
         }
     });
 });
 
 function deleteKey() {
-    chrome.storage.sync.remove('alidata', function () {
-        console.log('Key has been deleted from storage');
-    });
+    try {
+        chrome.storage.sync.remove('alidata', function () {
+            console.log('Key [alidata] has been deleted from storage');
+        });
+    }
+    catch {
+        console.log("Error while deleting key");
+    }
 }
 
 function updateKey() {
-    deleteKey();
-    var arrayArg = new Array();
-    var jsonArg = new Object();
-    jsonArg.currency = $("#currencies :selected").val();
-    jsonArg.region = $("#countries :selected").val();
-    jsonArg.b_locale = "en_US";
-    jsonArg.site = "glo";
-    if ($('#global_mode').is(":checked")) jsonArg.global_mode = 1;
-    else jsonArg.global_mode = 0;
-    if ($('#country_currency_mode').is(":checked")) jsonArg.country_currency_mode = 1;
-    else {
-        jsonArg.country_currency_mode = 0;
-        jsonArg.country_currency = 0;
+    try {
+        deleteKey();
+        var data = new Array();
+        var json_data = new Object();
+        json_data.currency = $("#currencies :selected").val();
+        json_data.region = $("#countries :selected").val();
+        json_data.b_locale = "en_US";
+        json_data.site = "glo";
+        if ($('#global_mode').is(":checked")) json_data.global_mode = 1;
+        else json_data.global_mode = 0;
+        if ($('#country_currency_mode').is(":checked")) json_data.country_currency_mode = 1;
+        else {
+            json_data.country_currency_mode = 0;
+            json_data.country_currency = 0;
+        }
+        if ($('#shipment_method_mode').is(":checked")) json_data.shipment_method_mode = 1;
+        else json_data.shipment_method_mode = 0;
+        json_data.shipment_method_id = $("#shipment_methods :selected").val();
+        data.push(json_data);
+        var jsonArray = JSON.stringify(data);
+        chrome.storage.sync.set({ "alidata": jsonArray }, function () {
+            console.log("Key successful updated")
+        });
     }
-    if ($('#shipment_method_mode').is(":checked")) jsonArg.shipment_method_mode = 1;
-    else jsonArg.shipment_method_mode = 0;
-    jsonArg.shipment_method_id = $("#shipment_methods :selected").val();
-    arrayArg.push(jsonArg);
-    var jsonArray = JSON.stringify(arrayArg);
-    chrome.storage.sync.set({ "alidata": jsonArray }, function () {
-        console.log("Key successful updated")
-    });
+    catch {
+        console.log("Error while updating key data from popup");
+    }
 }
 
 $("select, #global_mode, #country_currency_mode, #shipment_method_mode").change(function () {
