@@ -21,7 +21,7 @@
 2. In Chrome Browser enable Developer Mode 
   > **Settings** -> **Extensions** -> **Developer Mode** -> **ON**
 3. Click **Load unpacked** and choose folder with project
-4. Open extension on the Menu Bar and choose yout country and currency
+4. Open extension on the Menu Bar and choose your country and currency
 5. Open any aliexpress page and see results
 
 # Contributing
