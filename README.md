@@ -1,8 +1,8 @@
 # Aliexpress global version switcher
 
-[EN] Chrome extension which helps redirect to global version and display pages with set shipment country, currency
+[EN] Google Chrome extension automatically redirects users from the ru version of the site to the global version (.com). It also sets the designated country for delivery and currency. This addresses the issue when users are automatically redirected to the russian version of the site, which can hinder access to the global version.
 
-[UKR] Додаток для браузеру Google Chrome, який автоматично перенаправляє з російської на глобальну версію сайту (.com), а також встановлює задану країну доставки та валюту. Деяких користувачів на основі айпі адреси,або налаштувань браузеру автоматично перенаправляє на російську версію, яка може некоректно відображатися,або взагалі не відкриватися, що унеможливлює відкриття глобальної на домені aliexpress.com. Додаток вирішує цю проблему.
+[UKR] Розширення для Google Chrome, яке автоматично перенаправляє користувачів з російської версії сайту (.ru) на глобальну версію (.com). Також встановлює задану країну доставки та валюту. Це вирішує проблему, коли користувачі автоматично перенаправляються на російську версію сайту, що може бути проблемою для доступу до глобальної версії.
 
 **Important note**: Some counties are not supporting global version and working only on the ru. By default it will be set to US
 
