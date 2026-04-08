@@ -2,6 +2,7 @@
 
 > A Chrome extension that automatically redirects any regional AliExpress domain to your preferred version of the site and applies the correct locale, currency, and delivery country.
 
+![Screenshot](https://github.com/svtcore/aliexpress-global-switcher/blob/main/screenshot.png)
 ---
 
 ## Problem
