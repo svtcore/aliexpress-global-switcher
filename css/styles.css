@@ -1,7 +1,220 @@
-.main-block {
-    width: 400px;
-    padding-left: 5%;
-    padding-right: 5%;
-    padding-top: 3%;
-    height: 200px;
+/* Reset & base */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  width: 360px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-size: 13px;
+  color: #1a1a2e;
+  background: #f5f6fa;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header */
+.popup-header {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 14px 16px 13px;
+  background: #E82E2E;
+  color: #fff;
+}
+
+.header-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  background: rgba(255,255,255,0.18);
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.header-title {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+}
+
+.header-sub {
+  font-size: 11px;
+  opacity: 0.8;
+  font-weight: 400;
+}
+
+/* Body */
+.popup-body {
+  padding: 14px 16px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Divider */
+.divider {
+  height: 1px;
+  background: #e8eaf0;
+  margin: 0 -16px;
+}
+
+/* Global mode row */
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.setting-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.setting-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.setting-desc {
+  font-size: 11px;
+  color: #6b7280;
+  line-height: 1.4;
+}
+
+/* Toggle switch */
+.toggle {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-track {
+  display: block;
+  width: 40px;
+  height: 22px;
+  background: #d1d5db;
+  border-radius: 11px;
+  transition: background 0.2s ease;
+  position: relative;
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease;
+}
+
+.toggle input:checked + .toggle-track {
+  background: #e84118;
+}
+
+.toggle input:checked + .toggle-track .toggle-thumb {
+  transform: translateX(18px);
+}
+
+/* Field groups */
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.field-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #6b7280;
+}
+
+.field-label svg {
+  color: #9ca3af;
+  flex-shrink: 0;
+}
+
+/* Select */
+.field-select {
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 7px 32px 7px 10px;
+  font-size: 12.5px;
+  font-family: inherit;
+  color: #1a1a2e;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  outline: none;
+}
+
+.field-select:hover {
+  border-color: #c4c9d4;
+}
+
+.field-select:focus {
+  border-color: #e84118;
+  box-shadow: 0 0 0 3px rgba(232, 65, 24, 0.12);
+}
+
+/* Footer */
+.popup-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 16px 11px;
+  border-top: 1px solid #e8eaf0;
+  background: #fff;
+}
+
+.footer-message {
+  font-size: 11px;
+  color: #16a34a;
+  font-weight: 500;
+  flex: 1;
+}
+
+.footer-link {
+  display: flex;
+  align-items: center;
+  color: #9ca3af;
+  text-decoration: none;
+  transition: color 0.15s;
+  padding: 2px;
+  border-radius: 4px;
+}
+
+.footer-link:hover {
+  color: #1a1a2e;
 }
