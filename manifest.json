@@ -1,24 +1,24 @@
 {
-  "name": "Aliexpress global switcher",
+  "name": "AliExpress Global Switcher",
   "manifest_version": 3,
-  "version": "2.0.0",
-  "description": "Automate switch from ru to global version aliexpress.com",
+  "version": "3.0.0",
+  "description": "Automatically redirects regional AliExpress domains to the global version with correct locale, currency, and region settings",
   "permissions": [
     "tabs",
     "storage",
-    "cookies"
+    "cookies",
+    "webNavigation"
   ],
   "action": {
     "default_popup": "popup.html"
   },
   "host_permissions": [
-    "https://login.aliexpress.com/*",
-    "https://login.aliexpress.ru/*",
-    "https://aliexpress.ru/*",
-    "https://www.aliexpress.com/*",
-    "https://wp.aliexpress.com/*"
+    "*://*.aliexpress.com/*",
+    "*://*.aliexpress.ru/*",
+    "*://*.aliexpress.us/*"
   ],
   "background": {
-    "service_worker": "./js/background.js"
+    "service_worker": "js/background.js",
+    "type": "module"
   }
 }
