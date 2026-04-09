@@ -7,7 +7,7 @@
 
 ## Problem
 
-AliExpress sometimes forces users onto a regional domain — most commonly `aliexpress.ru` or a language-specific subdomain such as `de.aliexpress.com` — even when the global `www.aliexpress.com` is requested. This makes it harder to shop in the preferred language, currency, or delivery region.
+AliExpress sometimes forces users onto a regional domain – most commonly `aliexpress.ru` or a language-specific subdomain such as `de.aliexpress.com` – even when the global `www.aliexpress.com` is requested. This makes it harder to shop in the preferred language, currency, or delivery region.
 
 Related community reports: [#1](https://www.reddit.com/r/Aliexpress/comments/u3566t/is_aliexpress_broken/) · [#2](https://www.reddit.com/r/Aliexpress/comments/fq4ylc/aliexpresscom_redirecting_to_ru/) · [#3](https://www.reddit.com/r/Aliexpress/comments/hac0n1/aliexpresscom_keeps_redirecting_me_to_russian/) · [#4](https://www.reddit.com/r/Aliexpress/comments/35r87s/why_the_f_is_aliexpress_in_russian/)
 
@@ -15,12 +15,12 @@ Related community reports: [#1](https://www.reddit.com/r/Aliexpress/comments/u35
 
 ## Features
 
-- **Automatic redirect** — intercepts navigation to `aliexpress.ru`, `aliexpress.us`, and all language subdomains (`de.`, `fr.`, `es.`, `pt.`, `it.`, `nl.`, `tr.`, `ja.`, `ko.`, `th.`, `ar.`, `he.`, `pl.aliexpress.com`) before any network request is made.
-- **Locale-aware routing** — routes you to the correct language subdomain based on your selected locale (e.g. `de.aliexpress.com` for `de_DE`).
-- **Cookie-based region & currency** — sets the AliExpress session cookies (`aep_usuc_f`) so that the delivery country and currency are applied instantly on every page load.
-- **Auto-detection** — selecting a country in the popup automatically suggests the matching locale and currency.
-- **Global Mode toggle** — redirect and cookie injection can be enabled or disabled at any time without reinstalling the extension.
-- **Sync storage** — settings are stored in `chrome.storage.sync` and follow the user across devices.
+- **Automatic redirect** – intercepts navigation to `aliexpress.ru`, `aliexpress.us`, and all language subdomains (`de.`, `fr.`, `es.`, `pt.`, `it.`, `nl.`, `tr.`, `ja.`, `ko.`, `th.`, `ar.`, `he.`, `pl.aliexpress.com`) before any network request is made.
+- **Locale-aware routing** – routes you to the correct language subdomain based on your selected locale (e.g. `de.aliexpress.com` for `de_DE`).
+- **Cookie-based region & currency** – sets the AliExpress session cookies (`aep_usuc_f`) so that the delivery country and currency are applied instantly on every page load.
+- **Auto-detection** – selecting a country in the popup automatically suggests the matching locale and currency.
+- **Global Mode toggle** – redirect and cookie injection can be enabled or disabled at any time without reinstalling the extension.
+- **Sync storage** – settings are stored in `chrome.storage.sync` and follow the user across devices.
 
 ---
 
@@ -48,7 +48,7 @@ Then follow steps 2–4 above, pointing **Load unpacked** at the cloned folder.
 1. Click the extension icon in the Chrome toolbar to open the popup.
 2. Enable **Global Mode**.
 3. Select your **Country**, **Currency**, and **Language**.
-4. Reload any AliExpress tab — the extension will redirect you to the correct domain and apply the chosen settings.
+4. Reload any AliExpress tab – the extension will redirect you to the correct domain and apply the chosen settings.
 
 > **Note:** Settings are saved automatically after each change. They take effect on the next page load.
 
@@ -61,7 +61,7 @@ The extension uses two event hooks inside a Manifest V3 service worker:
 | Hook | Purpose |
 |------|---------|
 | `webNavigation.onBeforeNavigate` | Detects a regional domain *before* any network request is sent and performs an immediate tab redirect. |
-| `tabs.onUpdated` (status: `complete`) | Re-applies cookies and redirects after a page finishes loading — used when the user changes settings in the popup. |
+| `tabs.onUpdated` (status: `complete`) | Re-applies cookies and redirects after a page finishes loading – used when the user changes settings in the popup. |
 
 Cookie injection is done by calling the AliExpress `setCommonCookie.htm` endpoint with the selected `region`, `currency`, and `bLocale` parameters, and by clearing any stale `aep_usuc_f` cookies beforehand.
 
